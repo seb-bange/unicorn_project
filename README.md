@@ -34,7 +34,8 @@ To achieve this, I designed an interactive dashboard that consolidates key perfo
      
 3. **Tableau Dashboard**  
    - Designed an interactive Tableau dashboard to visualize key performance indicators (KPIs), trends, and strategic recommendations for data-driven decision-making.
-Screenshot 2025-02-28 at 13.03.50.png
+<img width="1470" alt="Screenshot 2025-02-28 at 13 03 50" src="https://github.com/user-attachments/assets/92f4f0ca-1ca9-448d-b108-6a619ef02bf1" />
+
 ---
 
 ## 🔍 **Insights**  
