@@ -1,0 +1,406 @@
+/* 1. How many customers do we have in the data? */
+
+SELECT COUNT(customer_id) AS total_customers
+FROM customers
+;
+
+
+/* 2. What was the city with the most profit for the company in 2015? */
+
+SELECT
+	o.shipping_city,									-- showing the city
+	SUM(od.order_profits) AS profit		-- and the profit in one query
+FROM order_details od
+
+LEFT JOIN orders o USING (order_id)
+
+WHERE 1=1
+	AND EXTRACT(year FROM o.order_date) = 2015
+
+GROUP BY o.shipping_city
+ORDER BY profit DESC
+LIMIT 1
+;
+
+/* Alternative for only showing the city name
+
+SELECT 
+    o.shipping_city
+FROM order_details od
+LEFT JOIN orders o
+USING (order_id)
+WHERE EXTRACT(year FROM o.order_date) = 2015
+GROUP BY o.shipping_city
+ORDER BY SUM(od.order_profits) DESC
+LIMIT 1; */
+
+
+/* 3. In 2015, what was the most profitable city's profit? */
+
+SELECT
+	o.shipping_city,
+	SUM(od.order_profits) AS profit
+FROM order_details od
+
+LEFT JOIN orders o USING (order_id)
+
+WHERE 1=1
+	AND EXTRACT(year FROM o.order_date) = 2015
+
+GROUP BY o.shipping_city
+ORDER BY profit DESC
+LIMIT 1
+;
+
+/* Alternative for only showing the profit value
+SELECT 
+    SUM(od.order_profits) AS profit
+FROM order_details od
+LEFT JOIN orders o
+USING (order_id)
+WHERE EXTRACT(year FROM o.order_date) = 2015
+GROUP BY o.shipping_city
+ORDER BY profit DESC
+LIMIT 1; */
+ 
+/* 4. How many different cities do we have in the data? */ 
+
+SELECT COUNT(DISTINCT shipping_city) AS total_num_cities
+FROM orders
+;
+
+/* 5. Show the total spent by customers from low to high. */
+
+SELECT
+		c.customer_id,
+    SUM(od.order_sales) AS total_spent
+FROM order_details od
+
+LEFT JOIN orders o USING (order_id)
+LEFT JOIN customers c USING (customer_id)
+
+GROUP BY c.customer_id
+ORDER BY total_spent
+;
+
+/* 6. What is the most profitable city in the State of Tennessee? */
+
+SELECT
+		o.shipping_state,
+		o.shipping_city,
+		SUM(od.order_profits) AS total_profit
+FROM order_details od
+
+LEFT JOIN orders o USING (order_id)
+
+WHERE 1=1
+	AND o.shipping_state = 'Tennessee'
+
+GROUP BY o.shipping_state, o.shipping_city
+ORDER BY total_profit DESC
+LIMIT 1
+;
+
+/* 7. What’s the average annual profit for that city across all years? */
+
+SELECT
+		-- I want to see the active years
+    EXTRACT(year FROM o.order_date) AS years,
+    ROUND(AVG(od.order_profits)::NUMERIC, 2) AS avg_profit
+FROM order_details od
+
+LEFT JOIN orders o USING (order_id)
+
+WHERE 1=1
+	AND shipping_city = 'Lebanon'
+
+GROUP BY years
+ORDER BY years
+;
+
+/* 8. What is the distribution of customer types in the data? */
+
+SELECT
+    customer_segment,
+    COUNT(DISTINCT customer_id) AS count_customers,
+    -- additional functions for seeing the distribution as percentage
+    ROUND(COUNT(DISTINCT customer_id) * 100.0 / SUM(COUNT(DISTINCT customer_id)) OVER (), 2) AS perc_distribution
+FROM customers
+
+GROUP BY customer_segment
+ORDER BY count_customers DESC;
+
+/* 9. What’s the most profitable product category on average in Iowa across all years? */
+
+SELECT
+		p.product_category,
+    SUM(order_profits) AS total_profit_iowa
+FROM order_details od
+
+LEFT JOIN product p USING (product_id)
+LEFT JOIN orders o USING (order_id)
+
+WHERE 1=1
+	AND o.shipping_state = 'Iowa'
+
+GROUP BY p.product_id
+ORDER BY total_profit_iowa DESC
+LIMIT 1
+; 
+
+/* 10. What is the most popular product in that category across all states in 2016? */
+
+SELECT
+    p.product_name,
+    COUNT(od.product_id) OVER (PARTITION BY p.product_category) AS most_popular
+FROM order_details od
+
+LEFT JOIN product p USING (product_id)
+LEFT JOIN orders o USING (order_id)
+
+WHERE 1=1
+	AND EXTRACT(year FROM o.order_date) = 2016
+  AND p.product_category = 'Furniture'
+ORDER BY COUNT(od.product_id) OVER (PARTITION BY p.product_category) DESC
+LIMIT 1
+;
+
+/* 11. Which customer got the most discount in the data? (in total amount) */
+
+-- first CTE for getting the retail price
+
+WITH retail_price AS (
+  
+  SELECT
+  	order_details_id,
+		ROUND((order_sales / (1 - order_discount))::NUMERIC, 2) AS retail_price  
+  FROM order_details
+  
+  WHERE 1=1
+  	AND order_discount > 0
+  
+  GROUP by order_details_id
+  
+  ),
+
+--second CTE for the total discount
+
+discount_totals AS (
+  
+  SELECT
+  	o.customer_id,
+  	SUM(rp.retail_price - od.order_sales) AS total_discount
+  FROM order_details od
+  
+  LEFT JOIN orders o USING (order_id)
+  LEFT JOIN retail_price rp USING (order_details_id)
+  
+  WHERE 1=1
+  	AND od.order_discount > 0
+  
+  GROUP BY o.customer_id
+  
+  )
+  
+SELECT
+  c.customer_id,
+  c.customer_name,
+  dt.total_discount
+FROM discount_totals dt
+
+LEFT JOIN customers c ON dt.customer_id = c.customer_id --JOIN to get the total discount to group by customer
+
+ORDER BY dt.total_discount DESC
+LIMIT 1 
+;
+   
+/* 12. How widely did monthly profits vary in 2018? */
+
+WITH year_and_month AS (
+  
+  SELECT
+  	order_id,
+  	EXTRACT(year FROM order_date) AS year,
+  	EXTRACT(month FROM order_date) AS month
+  FROM orders
+  
+ )
+
+ SELECT
+	yam.year,
+  yam.month,
+	SUM(od.order_profits) AS total_profit_month,
+  MAX(od.order_profits) AS highest_profit_month,
+  MIN(od.order_profits) AS lowest_profit_month,
+  MAX(od.order_profits) - MIN(od.order_profits) AS difference_high_low_month,
+  SUM(SUM(od.order_profits)) OVER (PARTITION BY yam.year) AS total_profit_year
+FROM orders o
+
+LEFT JOIN order_details od USING(order_id)
+LEFT JOIN year_and_month yam USING(order_id)
+
+WHERE 1=1
+	AND year = 2018
+
+GROUP BY yam.year, yam.month
+;
+  
+
+/* 13. Which was the biggest order regarding sales in 2015? */
+
+SELECT
+	od.order_id,
+	SUM(od.order_sales) AS biggest_order
+FROM order_details od
+
+LEFT JOIN orders o USING(order_id)
+
+WHERE 1=1
+	AND EXTRACT(year FROM o.order_date) = 2015
+
+GROUP BY order_id
+ORDER BY biggest_order DESC
+LIMIT 1
+;
+
+/* 14. What was the rank of each city in the East region in 2015 in quantity? */
+
+WITH sum_quantity AS (
+  
+SELECT
+	o.shipping_city,
+  SUM(od.quantity) AS total_quantity
+FROM	order_details od
+  
+LEFT JOIN orders o USING (order_id)
+  
+WHERE 1=1
+	AND EXTRACT(year FROM o.order_date) = 2015
+  AND o.shipping_region = 'East'
+  
+GROUP BY o.shipping_city
+  
+)
+
+SELECT
+	sq.shipping_city,
+  sq.total_quantity,
+	DENSE_RANK() OVER (ORDER BY sq.total_quantity DESC) AS quantity_rank
+FROM sum_quantity sq
+ ;
+
+
+/* 15. Display customer names for customers who are in the segment ‘Consumer’ or ‘Corporate.’ How many customers are there in total? */
+
+WITH customer_filtering AS (
+  
+  SELECT
+	c.customer_name AS name,
+  c.customer_segment AS segment
+FROM customers c
+  
+WHERE 1=1
+  AND c.customer_segment IN ('Consumer', 'Corporate')
+  
+ORDER BY c.customer_segment, c.customer_name
+  
+  )
+
+SELECT 
+	name,
+  segment,
+	COUNT(name) OVER (PARTITION BY segment) AS total_customer_segment,
+  COUNT(name) OVER () AS total_customer
+FROM customer_filtering
+;
+
+/* 16. Calculate the difference between the largest and smallest order quantities for product id ‘100.’ */
+
+
+SELECT
+  product_id,
+  MAX(quantity) - MIN(quantity) AS difference
+FROM order_details
+
+WHERE 1=1
+	AND product_id = 100
+
+GROUP BY product_id;
+
+
+/* 17. Calculate the percent of products that are within the category ‘Furniture.’  */
+
+WITH total_products AS (
+  
+	SELECT
+		COUNT(product_id)::NUMERIC AS product_count
+	FROM product
+  
+	),
+  
+furniture_count AS (
+  
+	SELECT
+		COUNT(product_id::NUMERIC) AS product_count_furniture
+	FROM product
+  
+	WHERE 1=1
+  	AND product_category = 'Furniture'
+  
+  )
+  
+SELECT 
+  	ROUND(product_count_furniture/product_count * 100, 2) as percentage_furniture
+FROM total_products, furniture_count
+;
+
+/* 18. Display the number of product manufacturers with more than 1 product in the product table. */
+
+SELECT
+	product_manufacturer AS manufacturer,
+  COUNT(product_id) AS num_of_products
+FROM product
+
+GROUP BY product_manufacturer
+HAVING COUNT(product_id) >1
+ORDER BY product_manufacturer
+;
+
+/* 19. Show the product_subcategory and the total number of products in the subcategory.
+Show the order from most to least products and then by product_subcategory name ascending. */
+
+SELECT
+	product_subcategory AS subcategory,
+	COUNT(product_id) AS num_of_products
+FROM product
+
+GROUP BY product_subcategory
+ORDER BY num_of_products DESC, product_subcategory
+;
+
+/* 20. Show the product_id(s), the sum of quantities, where the total sum of its product quantities is greater than or equal to 100. */
+
+SELECT
+		p.product_id,
+		od.quantity		    
+FROM product p
+
+LEFT JOIN order_details od USING (product_id)
+
+WHERE 1=1
+	AND od.quantity >= 100
+
+ORDER BY od.quantity DESC
+;
+
+
+/* Bonus question:
+Join all database tables into one dataset that includes all unique columns and download it as a .csv file. */
+
+SELECT  *
+FROM orders o
+
+LEFT JOIN order_details od USING(order_id)
+LEFT JOIN product USING(product_id)
+RIGHT JOIN customers USING(customer_id)
+;
