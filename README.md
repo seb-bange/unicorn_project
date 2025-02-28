@@ -14,9 +14,9 @@ The objective of this project was to develop an interactive dashboard that provi
 
 ## 🚀 **Approach and Implementation**  
 To achieve this, I designed an interactive dashboard that consolidates key performance indicators (KPIs) to facilitate data-driven decision-making. The analysis revealed several notable trends:
-	- **Steady sales growth over time**, with seasonal peaks in September and a temporary decline in October. Sales recover in November, culminating in a peak during the holiday season.
-	- Technology products accounted for both the highest and lowest-performing items. **The poorest-performing products were heavily discounted**, resulting in significant losses.
-	- Variations in category performance: While office supplies and technology consistently contributed to overall profitability, the furniture category exhibited **inconsistent 		performance** across its subcategories.
+- **Steady sales growth over time**, with seasonal peaks in September and a temporary decline in October. Sales recover in November, culminating in a peak during the holiday season.
+- Technology products accounted for both the highest and lowest-performing items. **The poorest-performing products were heavily discounted**, resulting in significant losses.
+- Variations in category performance: While office supplies and technology consistently contributed to overall profitability, the furniture category exhibited **inconsistent 		performance** across its subcategories.
 
 ---
 
