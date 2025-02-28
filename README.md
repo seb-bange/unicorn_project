@@ -67,7 +67,7 @@ To achieve this, I designed an interactive dashboard that consolidates key perfo
 ## 🔗 **Links**  
 
 - **Link to Tableau Dashboard:** [View Dashboard](https://public.tableau.com/views/Unicorn_SB/UnicornDashboard?:language=de-DE&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
-- **Link to Google Sheets:** [View Spreadsheet](https://docs.google.com/](https://docs.google.com/spreadsheets/d/1jUyUQJ3oN0luzwC3SvZl_KKMN68UIXrywmv9UrJoj2Q/edit?usp=drive_link)  
+- **Link to Google Sheets:** [View Spreadsheet](https://docs.google.com/spreadsheets/d/1jUyUQJ3oN0luzwC3SvZl_KKMN68UIXrywmv9UrJoj2Q/edit?usp=drive_link)  
 - **Link to SQL Documentation:** [View SQL Documentation](sql_queries)  
 - **Link to Presentation Video:** [Watch Video]([https://drive.google.com/](https://drive.google.com/file/d/1KaeFSJ-NaVMhXFrX1a0_2Sh0SPwzQ2jK/view?usp=drive_link))  
 
