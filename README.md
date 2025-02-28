@@ -22,18 +22,18 @@ To achieve this, I designed an interactive dashboard that consolidates key perfo
 
 ## 📊 **Project Steps**  
 
-1. **SQL Queries**  
-   - Explored the Unicorn database using SQL to answer key questions about sales, profit, and customer behavior.  
-   - Cleaned and joined tables, performed aggregations, and ranked cities, products, and regions by their performance.  
-   - Documented queries to ensure reproducibility.  
+1. **SQL Analysis**  
+   - Conducted in-depth data exploration using SQL to analyze sales, profitability, and customer behavior.  
+   - Cleaned and integrated datasets, performed aggregations, and ranked cities, products, and regions based on performance.  
+   - Documented queries to ensure consistency and reproducibility.  
 
 2. **Google Sheets Analysis**  
-   - Aggregated data using pivot tables to analyze performance by product category and customer segment.  
-   - Developed calculated metrics (e.g., price per unit, profit margin).  
-   - Applied conditional formatting to highlight opportunities for growth and underperforming regions.
-
+   - Utilized pivot tables to aggregate data and assess performance across product categories and customer segments.  
+   - Created calculated metrics such as price per unit and profit margin to enhance analytical depth.  
+   - Applied conditional formatting to identify growth opportunities and highlight underperforming regions.
+     
 3. **Tableau Dashboard**  
-   - Built an interactive Tableau dashboard to present KPIs, trends, and actionable recommendations for business decision-making.
+   - Designed an interactive Tableau dashboard to visualize key performance indicators (KPIs), trends, and strategic recommendations for data-driven decision-making.
 <img width="580" alt="Screenshot 2025-02-04 at 19 17 01" src="https://github.com/user-attachments/assets/6f9e5135-2a2a-4566-96a3-11e75b59de20" />
 
 ---
