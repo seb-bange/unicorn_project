@@ -8,7 +8,7 @@ FROM customers
 /* 2. What was the city with the most profit for the company in 2015? */
 
 SELECT
-	o.shipping_city,									-- showing the city
+	o.shipping_city,			-- showing the city
 	SUM(od.order_profits) AS profit		-- and the profit in one query
 FROM order_details od
 
