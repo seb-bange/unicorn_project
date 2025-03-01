@@ -60,7 +60,7 @@ To achieve this, I designed an interactive dashboard that consolidates key perfo
 ---
 
 ## 📋 **Executive Summary**  
-- [Executive Summary Document]()
+- [Executive Summary Document](https://github.com/seb-bange/unicorn_project/blob/main/Unicorn_summary_SB.pdf)
 
 ---
 
@@ -69,17 +69,17 @@ To achieve this, I designed an interactive dashboard that consolidates key perfo
 - **Link to Tableau Dashboard:** [View Dashboard](https://public.tableau.com/views/Unicorn_SB/UnicornDashboard?:language=de-DE&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 - **Link to Google Sheets:** [View Spreadsheet](https://docs.google.com/spreadsheets/d/1jUyUQJ3oN0luzwC3SvZl_KKMN68UIXrywmv9UrJoj2Q/edit?usp=drive_link)  
 - **Link to SQL Documentation:** [View SQL Documentation](sql_queries)  
-- **Link to Presentation Video:** [Watch Video]([https://drive.google.com/](https://drive.google.com/file/d/1KaeFSJ-NaVMhXFrX1a0_2Sh0SPwzQ2jK/view?usp=drive_link))  
+- **Link to Presentation Video:** [Watch Video](https://drive.google.com/](https://drive.google.com/file/d/1KaeFSJ-NaVMhXFrX1a0_2Sh0SPwzQ2jK/view?usp=drive_link) 
 
 ---
 
 ## ✅ **Recommendations**  
-- Investigate and address the high discounts on underperforming technology products.  
-- Collaborate with the marketing team to increase order volumes in underrepresented regions.  
-- Consider discontinuing or redesigning products with consistent losses or low performance.  
-- Collect additional data (e.g., customer feedback, return conditions) to further improve product strategy.  
+- **Examine discount strategies:** Identify the reasons behind steep discounts on underperforming technology products and take corrective actions.
+- **Boost regional sales:** Work with the marketing team to drive higher order volumes in underrepresented areas.
+- **Optimize product lineup:** Discontinue or revamp consistently low-performing products to enhance profitability.
+- **Enhance data-driven decisions:** Collect additional insights, such as customer feedback and return conditions, to refine the product strategy.
 
-By addressing these recommendations, Unicorn has the potential to turn its current stable profit trend into a growing one.
+By implementing these strategies, Unicorn can shift from stable profitability to sustained growth.
 
 ---  
 
