@@ -39,28 +39,28 @@ To achieve this, I designed an interactive dashboard that consolidates key perfo
 ---
 
 ## 🔍 **Insights**  
-- **High-performing regions:** The West and East regions generated the highest profits and order volumes.  
-- **Product profitability:** Office Supplies and Technology were the main contributors to overall profitability, while certain Furniture subcategories underperformed.  
-- **Significant losses on discounts:** Technology products with high prices and discounts exceeding 50% contributed to overall losses.  
-- **Seasonal trends:** Sales peaked during November and December, with consistent growth across the analyzed period.
+- **Top-performing regions:** The West and East regions achieved the highest profits and order volumes.  
+- **Profitability by product category:** Office Supplies and Technology drove overall profits, while some Furniture subcategories showed weaker performance.  
+- **Impact of high discounts:** Technology products with steep discounts (over 50%) and high prices led to significant losses.  
+- **Seasonal patterns:** Sales reached their highest levels in November and December, showing steady growth throughout the analyzed period.
 
 ---
 
 ## 🔮 **Future Work**  
-- **Analyze discount patterns:** Investigate why certain high-priced products were heavily discounted, and determine if there's a risk of fraud or inefficiencies in the discounting process.  
-- **Expand data collection:** Gather additional data, such as return rates, product conditions, and customer feedback, to further refine product-level insights.  
-- **Optimize product portfolio:** Discontinue or revamp underperforming products based on profitability and customer feedback.  
-- **Expand marketing efforts:** Collaborate with the marketing team to increase order volumes in underrepresented regions (e.g., central states).
+- **Review discount strategies:** Assess the rationale behind significant discounts on high-priced products to identify potential inefficiencies or fraud risks.
+- **Enhance data collection:** Incorporate additional metrics, such as return rates, product conditions, and customer feedback, to improve product-level analysis.
+- **Refine product offerings:** Adjust or discontinue underperforming products based on profitability trends and customer insights.
+- **Strengthen marketing outreach:** Partner with the marketing team to drive sales growth in underrepresented regions, such as central states.
 
 ---
 
 ## 🌟 **Standout Section**  
-- **Beyond Instructions:** While following the core requirements, I also explored subcategories, applied calculated metrics in Google Sheets (e.g., price per unit, profit margin), and customized Tableau filters for region-specific insights. This allowed for deeper analysis beyond basic KPIs.  
+- **Going Beyond the Basics:** In addition to meeting the core requirements, I analyzed subcategories, introduced calculated metrics in Google Sheets (e.g., price per unit, profit margin), and refined Tableau filters for region-specific insights. This enabled a more in-depth analysis beyond standard KPIs.  
 
 ---
 
 ## 📋 **Executive Summary**  
-- [Executive Summary Document](#) (Attach the link or file if necessary)
+- [Executive Summary Document]()
 
 ---
 
